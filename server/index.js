@@ -1,30 +1,30 @@
-const express = require('express')
-const app = express()
-const port = 5000
-const mongoDB = require("./db")
+const express = require('express');
+const cors = require('cors');
+const mongoDB = require("./db");
+
+const app = express();
+const port = 5000;
+
 mongoDB();
 
-app.use((req,res,next)=>{
-    res.setHeader("Access-Control-Allow-Origin","https://food-zy.vercel.app");
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-})
-const cors = require('cors');
-
+// Apply CORS middleware
 app.use(cors({
-    //origin: 'http://localhost:3000', // Allow frontend to access backend
-    origin: 'https://food-zy.vercel.app',
+    origin: 'https://food-zy.vercel.app', // Allow only your frontend
     methods: 'GET,POST,PUT,DELETE',
-    credentials: true // Allow cookies and auth headers
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
 }));
 
-app.use(express.json())
+// Handle preflight requests
+app.options('*', cors());  
+
+app.use(express.json());
+
+// Define routes
 app.use('/api', require("./Routes/CreateUser"));
 app.use('/api', require("./Routes/DisplayData"));
 app.use('/api', require("./Routes/OrderData"));
+
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+    console.log(`Server running on port ${port}`);
+});
