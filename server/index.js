@@ -16,7 +16,7 @@ const cors = require('cors');
 
 app.use(cors({
     //origin: 'http://localhost:3000', // Allow frontend to access backend
-    origin: 'https://food-zy.vercel.app',
+    origin: '*',
     methods: 'GET,POST,PUT,DELETE',
     credentials: true // Allow cookies and auth headers
 }));
