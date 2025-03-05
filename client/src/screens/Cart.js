@@ -28,7 +28,7 @@ export default function Cart() {
     
         console.log("Sending Order Data:", orderData);  // Debug log
     
-        let response = await fetch("http://localhost:5000/api/orderData", {
+        let response = await fetch("https://foodzy-backend.vercel.app/api/orderData", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
