@@ -5,7 +5,7 @@ const mongoDB = require("./db")
 mongoDB();
 
 app.use((req,res,next)=>{
-    res.setHeader("Access-Control-Allow-Origin","*");
+    res.setHeader("Access-Control-Allow-Origin","https://food-zy.vercel.app");
     res.header(
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept"
@@ -16,7 +16,7 @@ const cors = require('cors');
 
 app.use(cors({
     //origin: 'http://localhost:3000', // Allow frontend to access backend
-    origin: '*',
+    origin: 'https://food-zy.vercel.app',
     methods: 'GET,POST,PUT,DELETE',
     credentials: true // Allow cookies and auth headers
 }));
