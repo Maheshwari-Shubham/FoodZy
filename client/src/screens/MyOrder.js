@@ -14,7 +14,7 @@ export default function MyOrder() {
         }
 
         try {
-            const response = await fetch("http://localhost:5000/api/myOrderData", {
+            const response = await fetch("https://foodzy-backend.vercel.app/api/myOrderData", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email: userEmail }),

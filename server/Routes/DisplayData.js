@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
-
-router.post('/foodData', (req, res) => {
+router.post('/foodData', async (req, res) => {
     try {
         if (!Array.isArray(global.food_items) || !Array.isArray(global.foodCategory)) {
             return res.status(503).json({ success: false, message: "Food data is unavailable" });
