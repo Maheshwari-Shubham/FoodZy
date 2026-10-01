@@ -1,29 +1,42 @@
+require('dotenv').config();
 const express = require('express')
-const app = express()
-const port = 5000
-const mongoDB = require("./db")
-mongoDB();
-
-app.use((req,res,next)=>{
-    res.setHeader("Access-Control-Allow-Origin","http://localhost:3000");
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-})
 const cors = require('cors');
+const app = express()
+const port = Number(process.env.PORT) || 5000
+const mongoDB = require("./db")
+const allowedOrigins = (process.env.CLIENT_ORIGIN || 'http://localhost:3000,https://food-zy.vercel.app')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
 
 app.use(cors({
-    origin: 'http://localhost:3000', // Allow frontend to access backend
-    methods: 'GET,POST,PUT,DELETE',
-    credentials: true // Allow cookies and auth headers
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+        return callback(new Error('Origin is not allowed by CORS'));
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json())
 app.use('/api', require("./Routes/CreateUser"));
 app.use('/api', require("./Routes/DisplayData"));
 app.use('/api', require("./Routes/OrderData"));
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+
+const startServer = async () => {
+    if (!process.env.JWT_SECRET) {
+        throw new Error("JWT_SECRET must be configured");
+    }
+
+    await mongoDB();
+    app.listen(port, () => {
+        console.log(`FoodZy API listening on port ${port}`);
+    });
+};
+
+startServer().catch((error) => {
+    console.error("Server startup failed:", error.message);
+    process.exit(1);
+});

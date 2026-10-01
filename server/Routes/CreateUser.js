@@ -5,12 +5,11 @@ const { body, validationResult } = require('express-validator');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const jwtSecret = "MYNAMEISENDTOENDYOUTUBECHANNEL$#";
-
 // ✅ Route to Create User
 router.post("/createuser", [
-    body('email').isEmail(),
-    body('name').isLength({ min: 3 }),
+    body('email').isEmail().normalizeEmail(),
+    body('name').trim().isLength({ min: 3 }),
+    body('location').trim().notEmpty().withMessage('Address is required'),
     body('password', "Incorrect Password").isLength({ min: 5 })],
     async (req, res) => {
 
@@ -23,7 +22,7 @@ router.post("/createuser", [
             const salt = await bcrypt.genSalt(10);
             let secPassword = await bcrypt.hash(req.body.password, salt);
 
-            let user = await User.create({
+            const user = await User.create({
                 name: req.body.name,
                 password: secPassword,
                 location: req.body.location,
@@ -32,10 +31,13 @@ router.post("/createuser", [
 
             // ✅ Generate auth token for auto-login
             const data = { user: { id: user.id } };
-            const authToken = jwt.sign(data, jwtSecret);
+            const authToken = jwt.sign(data, process.env.JWT_SECRET);
 
             res.json({ success: true, authToken: authToken });
         } catch (error) {
+            if (error.code === 11000) {
+                return res.status(409).json({ success: false, message: "An account with this email already exists" });
+            }
             console.error(error);
             res.status(500).json({ success: false, message: "Server Error" });
         }
@@ -44,7 +46,7 @@ router.post("/createuser", [
 
 // ✅ Route to Login User
 router.post("/loginuser", [
-    body('email').isEmail(),
+    body('email').isEmail().normalizeEmail(),
     body('password', "Incorrect Password").isLength({ min: 5 })],
     async (req, res) => {
 
@@ -65,7 +67,7 @@ router.post("/loginuser", [
             }
 
             const data = { user: { id: user.id } };
-            const authToken = jwt.sign(data, jwtSecret);
+            const authToken = jwt.sign(data, process.env.JWT_SECRET);
 
             res.json({ success: true, authToken: authToken });
         } catch (error) {

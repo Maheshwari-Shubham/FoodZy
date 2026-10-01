@@ -3,11 +3,14 @@ const router = express.Router()
 
 router.post('/foodData', (req, res) => {
     try {
-        //console.log(global.food_items)
+        if (!Array.isArray(global.food_items) || !Array.isArray(global.foodCategory)) {
+            return res.status(503).json({ success: false, message: "Food data is unavailable" });
+        }
+
         res.send([global.food_items, global.foodCategory])
     } catch (error) {
         console.error(error.message);
-        res.send("Server Error")
+        res.status(500).json({ success: false, message: "Server Error" })
     }
 })
 module.exports = router;
