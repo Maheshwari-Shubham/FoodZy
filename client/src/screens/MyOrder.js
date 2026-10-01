@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
+import API_BASE_URL from '../api';
 
 export default function MyOrder() {
     const [orderData, setOrderData] = useState([]);
 
     const fetchMyOrder = async () => {
-        const userEmail = localStorage.getItem("userEmail");
-
-        if (!userEmail) {
-            console.warn("User email not found.");
+        const authToken = localStorage.getItem("authToken");
+        if (!authToken) {
             return;
         }
 
         try {
-            const response = await fetch("https://foodzy-backend.vercel.app/api/myOrderData", {
+            const response = await fetch(`${API_BASE_URL}/api/myOrderData`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email: userEmail }),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${authToken}`
+                },
             });
 
+            if (!response.ok) {
+                throw new Error(`Order request failed with status ${response.status}`);
+            }
             const data = await response.json();
-            console.log("API Response:", data);
 
             if (!data.orderData || data.orderData.length === 0) {
                 console.warn("No orders found.");
@@ -62,7 +65,7 @@ export default function MyOrder() {
                                                     </div>
                                                 );
                                             } else {
-                                                totalPrice += item.price * item.qty; // Calculate total price for this specific order
+                                                totalPrice += item.price;
 
                                                 return (
                                                     <div key={`${index}-${i}`} className='col-12 col-md-6 col-lg-3'>

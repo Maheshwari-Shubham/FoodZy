@@ -1,6 +1,7 @@
 import React from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useCart, useDispatchCart } from '../components/ContextReducer';
+import API_BASE_URL from '../api'
 export default function Cart() {
     let data = useCart();
     let dispatch = useDispatchCart();
@@ -17,30 +18,29 @@ export default function Cart() {
     // }
 
     const handleCheckOut = async () => {
-        let userEmail = localStorage.getItem("userEmail");
-        console.log("User Email from localStorage:", userEmail);  // Debug log
-    
-        let orderData = {
+        const orderData = {
             order_data: data,
-            email: userEmail,  // Ensure email is not undefined
             order_date: new Date().toDateString()
         };
-    
-        console.log("Sending Order Data:", orderData);  // Debug log
-    
-        let response = await fetch("https://foodzy-backend.vercel.app/api/orderData", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(orderData)
-        });
-    
-        let jsonResponse = await response.json();
-        console.log("Checkout Response:", jsonResponse);  // Debug log
-    
-        if (response.status === 200) {
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/orderData`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('authToken') || ''}`
+                },
+                body: JSON.stringify(orderData)
+            });
+
+            const result = await response.json();
+            if (!response.ok || !result.success) {
+                throw new Error(result.message || 'Checkout failed');
+            }
             dispatch({ type: "DROP" });
+        } catch (error) {
+            console.error('Checkout failed:', error);
+            alert(error.message || 'Checkout failed. Please try again.');
         }
     };
     
@@ -49,7 +49,6 @@ export default function Cart() {
     return (
         <div>
 
-            {console.log(data)}
             <div className='container m-auto mt-5 table-responsive  table-responsive-sm table-responsive-md' >
                 <table className='table table-hover '>
                     <thead className=' text-success fs-4'>

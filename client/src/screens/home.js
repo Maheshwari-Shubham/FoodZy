@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Cards from '../components/Cards'
+import API_BASE_URL from '../api'
 
 export default function Home() {
 
@@ -10,16 +11,26 @@ export default function Home() {
     const [foodItem, setfoodItem] = useState([]);
 
     const loadData = async () => {
-        let response = await fetch("https://foodzy-backend.vercel.app/api/foodData", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/foodData`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (!response.ok) {
+                throw new Error(`Food data request failed with status ${response.status}`);
             }
-        });
-        response = await response.json();
-        setfoodItem(response[0]);
-        setfoodCat(response[1]);
-        //console.log(response[0],response[1]);
+
+            const data = await response.json();
+            if (!Array.isArray(data) || !Array.isArray(data[0]) || !Array.isArray(data[1])) {
+                throw new Error('Food data response has an invalid format');
+            }
+            setfoodItem(data[0]);
+            setfoodCat(data[1]);
+        } catch (error) {
+            console.error('Unable to load food data:', error);
+        }
     }
 
 
