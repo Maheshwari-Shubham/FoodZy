@@ -48,8 +48,8 @@ export default function Cards(props) {
             <img src={props.foodItem.img} className="card-img-top" alt={props.foodItem.name} />
             <div className="card-body">
                 <h5 className="card-title"> {props.foodItem.name} </h5>
-                <div className='container w-100'>
-                    <select className='form-select food-option-select d-inline-block w-auto m-2' onChange={(e) => setQty(e.target.value)}>
+                <div className='food-options'>
+                    <select className='food-option-select food-option-quantity' onChange={(e) => setQty(e.target.value)}>
                         {Array.from(Array(6), (e, i) => {
                             return (
                                 <option key={i + 1} value={i + 1}> {i + 1} </option>
@@ -57,13 +57,13 @@ export default function Cards(props) {
                         })}
                     </select>
 
-                    <select className='form-select food-option-select d-inline-block w-auto m-2' ref={priceRef} onChange={(e) => setSize(e.target.value)}>
+                    <select className='food-option-select food-option-size' ref={priceRef} onChange={(e) => setSize(e.target.value)}>
                         {priceOptions.map((data) => {
                             return <option key={data} value={data}>{data}</option>
                         })}
                     </select>
 
-                    <div className='d-inline h-100 fs-5'>
+                    <div className='food-option-price fs-5'>
                         Rs{finalPrice}/-
                     </div>
                 </div>

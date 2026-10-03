@@ -33,14 +33,37 @@ code {
 }
 
 .food-option-select {
-  min-width: 70px;
-  min-height: 38px;
+  flex: 0 0 auto;
+  height: 32px;
+  padding: 4px 22px 4px 8px;
   border-color: #c6dfcc;
-  border-radius: 7px;
+  border-radius: 6px;
   background-color: #eff7f0;
   color: #17432d;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
+}
+
+.food-options {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 4px;
+}
+
+.food-option-quantity {
+  width: 48px;
+}
+
+.food-option-size {
+  width: 80px;
+}
+
+.food-option-price {
+  min-width: 0;
+  flex: 1;
+  font-size: 17px !important;
+  white-space: nowrap;
 }
 
 .food-option-select:focus {
