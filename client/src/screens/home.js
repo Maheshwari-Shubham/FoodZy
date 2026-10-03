@@ -76,25 +76,27 @@ export default function Home() {
                     foodCat.length > 0
                         ? foodCat.map((data) => {
                             return (
-                                <div className='row mb-3'>
-                                    <div key={data._id} className='fs-3 m-3'>
+                                <section key={data._id} className='food-category mb-5'>
+                                    <div className='fs-3 mb-3'>
                                         {data.CategoryName}
                                     </div>
                                     <hr />
-                                    {foodItem.length > 0
-                                        ? foodItem.filter((item) => (item.CategoryName === data.CategoryName) && (item.name.toLowerCase().includes(search.toLocaleLowerCase())))
+                                    <div className='row g-5'>
+                                        {foodItem.length > 0
+                                            ? foodItem.filter((item) => (item.CategoryName === data.CategoryName) && (item.name.toLowerCase().includes(search.toLocaleLowerCase())))
                                             .map(filterItems => {
                                                 return (
-                                                    <div key={filterItems._id} className='col-12 col-md-6 col-lg-3'>
+                                                    <div key={filterItems._id} className='col-12 col-sm-6 col-lg-3 d-flex justify-content-center'>
                                                         <Cards foodItem = {filterItems}
                                                             options={filterItems.options[0]}                                                           
                                                         ></Cards>
                                                     </div>
                                                 )
                                             })
-                                        : <div> No Such Data Found </div>
-                                    }
-                                </div>
+                                            : <div> No Such Data Found </div>
+                                        }
+                                    </div>
+                                </section>
                             )
                         })
                         : <div>""""""""""</div>

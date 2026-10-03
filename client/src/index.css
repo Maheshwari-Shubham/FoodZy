@@ -16,3 +16,203 @@ code {
 #carousel{
   max-height: 500px;
 }
+
+.food-card {
+  width: 100%;
+  max-width: 18rem;
+  max-height: 360px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(32, 54, 35, 0.12);
+}
+
+.food-card .card-img-top {
+  height: 160px;
+  object-fit: cover;
+}
+
+.signup-page {
+  min-height: 100vh;
+  padding: 28px clamp(20px, 6vw, 88px) 48px;
+  background: #f6f7f0;
+  color: #1b3024;
+}
+
+.signup-brand {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: #1b3024;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 30px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.signup-brand span {
+  color: #ed7355;
+}
+
+.signup-layout {
+  display: grid;
+  grid-template-columns: minmax(360px, 0.9fr) minmax(0, 1.1fr);
+  max-width: 1200px;
+  min-height: min(760px, calc(100vh - 110px));
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 24px 70px rgba(35, 53, 36, 0.12);
+}
+
+.signup-panel {
+  align-self: center;
+  width: 100%;
+  max-width: 520px;
+  padding: 52px clamp(28px, 5vw, 72px);
+  margin: auto;
+}
+
+.signup-eyebrow {
+  margin: 0 0 12px;
+  color: #498553;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.signup-panel h1 {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(38px, 4vw, 54px);
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.signup-intro {
+  max-width: 340px;
+  margin: 14px 0 30px;
+  color: #667168;
+  line-height: 1.6;
+}
+
+.signup-form {
+  display: grid;
+  gap: 16px;
+}
+
+.signup-field .form-label {
+  margin-bottom: 6px;
+  color: #35463a;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.signup-field .form-control {
+  min-height: 48px;
+  padding: 10px 13px;
+  border-color: #dce3d9;
+  border-radius: 7px;
+  background-color: #fcfdfb;
+}
+
+.signup-field .form-control:focus {
+  border-color: #498553;
+  box-shadow: 0 0 0 3px rgba(73, 133, 83, 0.14);
+}
+
+.signup-submit {
+  display: flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 7px;
+  background: #287344;
+  color: #fff;
+  font-weight: 600;
+}
+
+.signup-submit:hover,
+.signup-submit:focus-visible {
+  background: #1e5f37;
+  color: #fff;
+}
+
+.signup-submit span {
+  font-size: 20px;
+}
+
+.signup-login {
+  margin: 20px 0 0;
+  color: #667168;
+  font-size: 14px;
+  text-align: center;
+}
+
+.signup-login a {
+  color: #287344;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.signup-visual {
+  display: flex;
+  min-height: 620px;
+  align-items: flex-end;
+  padding: clamp(28px, 5vw, 64px);
+  background-color: #455b35;
+  background-image: linear-gradient(0deg, rgba(20, 34, 20, 0.76), rgba(20, 34, 20, 0.02) 70%), url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1800&q=85');
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+}
+
+.signup-visual-copy span {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #f4d0a4;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+
+.signup-visual-copy p {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(30px, 3.2vw, 44px);
+  line-height: 1.12;
+}
+
+@media (max-width: 760px) {
+  .signup-page {
+    padding: 20px 16px 32px;
+  }
+
+  .signup-brand {
+    margin-bottom: 16px;
+  }
+
+  .signup-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .signup-panel {
+    padding: 36px 26px;
+  }
+
+  .signup-visual {
+    min-height: 240px;
+    padding: 28px;
+  }
+}
+
+@media (max-width: 420px) {
+  .signup-panel {
+    padding: 32px 20px;
+  }
+}
