@@ -32,6 +32,27 @@ code {
   object-fit: cover;
 }
 
+.food-option-select {
+  min-width: 70px;
+  min-height: 38px;
+  border-color: #c6dfcc;
+  border-radius: 7px;
+  background-color: #eff7f0;
+  color: #17432d;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.food-option-select:focus {
+  border-color: #3e9661;
+  box-shadow: 0 0 0 3px rgba(62, 150, 97, 0.16);
+}
+
+.food-option-select option {
+  background-color: #fff;
+  color: #1b3024;
+}
+
 .signup-page {
   min-height: 100vh;
   padding: 28px clamp(20px, 6vw, 88px) 48px;
