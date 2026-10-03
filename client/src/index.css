@@ -174,14 +174,14 @@ code {
   color: #1b3024;
 }
 
-.signup-page {
+.auth-page {
   min-height: 100vh;
   padding: 28px clamp(20px, 6vw, 88px) 48px;
   background: #f6f7f0;
   color: #1b3024;
 }
 
-.signup-brand {
+.auth-brand {
   display: inline-block;
   margin-bottom: 24px;
   color: #1b3024;
@@ -191,11 +191,11 @@ code {
   text-decoration: none;
 }
 
-.signup-brand span {
+.auth-brand span {
   color: #ed7355;
 }
 
-.signup-layout {
+.auth-layout {
   display: grid;
   grid-template-columns: minmax(360px, 0.9fr) minmax(0, 1.1fr);
   max-width: 1200px;
@@ -207,7 +207,7 @@ code {
   box-shadow: 0 24px 70px rgba(35, 53, 36, 0.12);
 }
 
-.signup-panel {
+.auth-panel {
   align-self: center;
   width: 100%;
   max-width: 520px;
@@ -215,7 +215,7 @@ code {
   margin: auto;
 }
 
-.signup-eyebrow {
+.auth-eyebrow {
   margin: 0 0 12px;
   color: #498553;
   font-size: 12px;
@@ -224,7 +224,7 @@ code {
   text-transform: uppercase;
 }
 
-.signup-panel h1 {
+.auth-panel h1 {
   margin: 0;
   font-family: Georgia, 'Times New Roman', serif;
   font-size: clamp(38px, 4vw, 54px);
@@ -232,26 +232,26 @@ code {
   line-height: 1.05;
 }
 
-.signup-intro {
+.auth-intro {
   max-width: 340px;
   margin: 14px 0 30px;
   color: #667168;
   line-height: 1.6;
 }
 
-.signup-form {
+.auth-form {
   display: grid;
   gap: 16px;
 }
 
-.signup-field .form-label {
+.auth-field .form-label {
   margin-bottom: 6px;
   color: #35463a;
   font-size: 13px;
   font-weight: 600;
 }
 
-.signup-field .form-control {
+.auth-field .form-control {
   min-height: 48px;
   padding: 10px 13px;
   border-color: #dce3d9;
@@ -259,12 +259,12 @@ code {
   background-color: #fcfdfb;
 }
 
-.signup-field .form-control:focus {
+.auth-field .form-control:focus {
   border-color: #498553;
   box-shadow: 0 0 0 3px rgba(73, 133, 83, 0.14);
 }
 
-.signup-submit {
+.auth-submit {
   display: flex;
   min-height: 50px;
   align-items: center;
@@ -278,30 +278,30 @@ code {
   font-weight: 600;
 }
 
-.signup-submit:hover,
-.signup-submit:focus-visible {
+.auth-submit:hover,
+.auth-submit:focus-visible {
   background: #1e5f37;
   color: #fff;
 }
 
-.signup-submit span {
+.auth-submit span {
   font-size: 20px;
 }
 
-.signup-login {
+.auth-switch {
   margin: 20px 0 0;
   color: #667168;
   font-size: 14px;
   text-align: center;
 }
 
-.signup-login a {
+.auth-switch a {
   color: #287344;
   font-weight: 700;
   text-decoration: none;
 }
 
-.signup-visual {
+.auth-visual {
   display: flex;
   min-height: 620px;
   align-items: flex-end;
@@ -313,7 +313,7 @@ code {
   color: #fff;
 }
 
-.signup-visual-copy span {
+.auth-visual-copy span {
   display: inline-block;
   margin-bottom: 12px;
   color: #f4d0a4;
@@ -323,7 +323,7 @@ code {
   text-transform: uppercase;
 }
 
-.signup-visual-copy p {
+.auth-visual-copy p {
   margin: 0;
   font-family: Georgia, 'Times New Roman', serif;
   font-size: clamp(30px, 3.2vw, 44px);
@@ -331,30 +331,30 @@ code {
 }
 
 @media (max-width: 760px) {
-  .signup-page {
+  .auth-page {
     padding: 20px 16px 32px;
   }
 
-  .signup-brand {
+  .auth-brand {
     margin-bottom: 16px;
   }
 
-  .signup-layout {
+  .auth-layout {
     grid-template-columns: 1fr;
   }
 
-  .signup-panel {
+  .auth-panel {
     padding: 36px 26px;
   }
 
-  .signup-visual {
+  .auth-visual {
     min-height: 240px;
     padding: 28px;
   }
 }
 
 @media (max-width: 420px) {
-  .signup-panel {
+  .auth-panel {
     padding: 32px 20px;
   }
 }
