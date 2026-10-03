@@ -9,6 +9,7 @@ export default function Cards(props) {
     let priceOptions = Object.keys(options);
     const [qty, setQty] = useState(1);
     const [size, setSize] = useState("");
+    const [imageLoaded, setImageLoaded] = useState(false);
 
     const handleAddToCart = async () => {
         let existingFood = data.find(item => item.id === props.foodItem._id && item.size === size);
@@ -45,7 +46,10 @@ export default function Cards(props) {
 
     return (
         <div className="card food-card mt-3">
-            <img src={props.foodItem.img} className="card-img-top" alt={props.foodItem.name} />
+            <div className='food-card-image'>
+                {!imageLoaded && <div className='food-skeleton-surface food-image-skeleton' aria-hidden='true' />}
+                <img src={props.foodItem.img} className={`card-img-top${imageLoaded ? ' is-loaded' : ''}`} alt={props.foodItem.name} onLoad={() => setImageLoaded(true)} onError={() => setImageLoaded(true)} />
+            </div>
             <div className="card-body">
                 <h5 className="card-title"> {props.foodItem.name} </h5>
                 <div className='food-options'>

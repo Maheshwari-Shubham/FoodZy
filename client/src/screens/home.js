@@ -9,6 +9,7 @@ export default function Home() {
     const [search, setSearch] = useState('');
     const [foodCat, setfoodCat] = useState([]);
     const [foodItem, setfoodItem] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     const loadData = async () => {
         try {
@@ -30,6 +31,8 @@ export default function Home() {
             setfoodCat(data[1]);
         } catch (error) {
             console.error('Unable to load food data:', error);
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -73,7 +76,28 @@ export default function Home() {
             </div> </div>
             <div className='container'>
                 {
-                    foodCat.length > 0
+                    isLoading
+                        ? <div className='row g-5 mb-5' role='status' aria-label='Loading menu'>
+                            <span className='visually-hidden'>Loading menu</span>
+                            {Array.from({ length: 4 }, (_, index) => (
+                                <div key={index} className='col-12 col-sm-6 col-lg-3 d-flex justify-content-center' aria-hidden='true'>
+                                    <div className='card food-card food-skeleton-card mt-3'>
+                                        <div className='food-skeleton-surface food-skeleton-image' />
+                                        <div className='card-body'>
+                                            <div className='food-skeleton-surface food-skeleton-title' />
+                                            <div className='food-skeleton-controls'>
+                                                <div className='food-skeleton-surface food-skeleton-quantity' />
+                                                <div className='food-skeleton-surface food-skeleton-size' />
+                                                <div className='food-skeleton-surface food-skeleton-price' />
+                                            </div>
+                                            <hr />
+                                            <div className='food-skeleton-surface food-skeleton-button' />
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        : foodCat.length > 0
                         ? foodCat.map((data) => {
                             return (
                                 <section key={data._id} className='food-category mb-5'>
@@ -99,7 +123,7 @@ export default function Home() {
                                 </section>
                             )
                         })
-                        : <div>""""""""""</div>
+                        : <div className='py-5 text-center'>The menu is currently unavailable.</div>
                 }
 
             </div>
